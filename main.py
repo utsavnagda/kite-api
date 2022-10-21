@@ -10,9 +10,9 @@ import pyotp
 
 # Getting nifty data before the market opens
 
-user_id = "TZ6658"       # Login Id
-password = "Okayokay@5"      # Login password
-twofa = pyotp.TOTP("AIF7NLNP6PJAKB3QHZAA5IGAVWZGVHF6").now()         # Login Pin or TOTP
+user_id = ""       # Login Id
+password = ""      # Login password
+twofa = pyotp.TOTP("").now()         # TOTP ID to generate the TOTP for login
 
 enctoken = get_enctoken(user_id, password, twofa)
 kite = KiteApp(enctoken=enctoken)
@@ -32,9 +32,9 @@ while(True):
 
 
 # logging in
-user_id = "TZ6658"       # Login Id
-password = "Okayokay@5"      # Login password
-twofa = pyotp.TOTP("AIF7NLNP6PJAKB3QHZAA5IGAVWZGVHF6").now()         # Login Pin or TOTP
+user_id = ""       # Login Id
+password = ""      # Login password
+twofa = pyotp.TOTP("").now()         # TOTP ID to generate the TOTP for login
 
 enctoken = get_enctoken(user_id, password, twofa)
 kite = KiteApp(enctoken=enctoken)
@@ -104,31 +104,7 @@ for i,x in enumerate(stocks):
         if(order):
             order_tracking[x] = order
     except(TypeError):
-        print("error")
-
-    # my_dict = kite.ltp(f"NSE:{x}")
-    # opening = my_dict[f"NSE:{x}"]["last_price"]
-    # sl_trigger = opening - ((opening*0.5)/100)
-    # try:
-    #     order = kite.place_order(variety=kite.VARIETY_REGULAR,
-    #                         exchange=kite.EXCHANGE_NSE,
-    #                         tradingsymbol=x,
-    #                         transaction_type=kite.TRANSACTION_TYPE_SELL,
-    #                         quantity=quant,
-    #                         product=kite.PRODUCT_MIS,
-    #                         order_type=kite.ORDER_TYPE_SLM,
-    #                         price=None,
-    #                         validity=None,
-    #                         disclosed_quantity=None,
-    #                         trigger_price=sl_trigger,
-    #                         squareoff=None,
-    #                         stoploss=None,
-    #                         trailing_stoploss=None,
-    #                         tag="TradeViaPython")
-    #     if(order):
-    #         order_tracking[x] = order
-    # except(TypeError):
-    #     print("error")
+        print("error: Market might have already closed!")
 
 print(order_tracking)
 
